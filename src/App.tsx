@@ -289,15 +289,27 @@ function App() {
   }
 
   const [currentView, setCurrentView] = useState(getViewFromPath()) // 'workflow-list', 'flow-builder', or 'contact-centers'
+  
+  // Handle browser back/forward navigation
+  useEffect(() => {
+    const handlePopState = () => {
+      setCurrentView(getViewFromPath())
+    }
+    
+    window.addEventListener('popstate', handlePopState)
+    return () => window.removeEventListener('popstate', handlePopState)
+  }, [])
 
   // Navigation function that updates both state and URL
   const navigateToView = (view: string) => {
+    console.log('Navigating to view:', view) // Debug log
     setCurrentView(view)
     let path = '/sbr/'
     if (view === 'contact-centers') path = '/sbr/callcenters'
     else if (view === 'flow-builder') path = '/sbr/ivr-edit'
     else if (view === 'workflow-list') path = '/sbr/workflows'
     
+    console.log('Setting path to:', path) // Debug log
     window.history.pushState({}, '', path)
   }
 
