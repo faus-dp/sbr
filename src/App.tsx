@@ -277,9 +277,9 @@ function App() {
   // URL routing functions
   const getViewFromPath = () => {
     const path = window.location.pathname
-    if (path === '/callcenters') return 'contact-centers'
-    if (path === '/ivr-edit') return 'flow-builder'
-    if (path === '/workflows') return 'workflow-list'
+    if (path === '/sbr/callcenters') return 'contact-centers'
+    if (path === '/sbr/ivr-edit') return 'flow-builder'
+    if (path === '/sbr/workflows') return 'workflow-list'
     return 'workflow-list' // default
   }
 
@@ -293,10 +293,10 @@ function App() {
   // Navigation function that updates both state and URL
   const navigateToView = (view: string) => {
     setCurrentView(view)
-    let path = '/'
-    if (view === 'contact-centers') path = '/callcenters'
-    else if (view === 'flow-builder') path = '/ivr-edit'
-    else if (view === 'workflow-list') path = '/workflows'
+    let path = '/sbr/'
+    if (view === 'contact-centers') path = '/sbr/callcenters'
+    else if (view === 'flow-builder') path = '/sbr/ivr-edit'
+    else if (view === 'workflow-list') path = '/sbr/workflows'
     
     window.history.pushState({}, '', path)
   }
